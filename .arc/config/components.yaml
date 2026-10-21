@@ -3,21 +3,65 @@ components:
   comp_web_app:
     name: Web App
     kind: web_ui
+    directory: apps/web
+    stack:
+      choices:
+        styling: tailwind css
+        language: typescript
+        framework: react + vite
+        package_manager: pnpm
+        testing_tool_e2e: playwright
+        testing_tool_unit: vitest
+      notes: database not applicable — calls the API Service and Identity Provider
+        only
   comp_api_service:
     name: API Service
     kind: api_service
+    directory: services/api
+    stack:
+      choices:
+        database: postgresql
+        language: typescript
+        framework: nestjs
+        package_manager: pnpm
+        testing_tool_e2e: jest + supertest
+        testing_tool_unit: jest
+      notes: styling not applicable — API only
   comp_worker:
     name: Worker
     kind: worker
+    directory: services/worker
+    stack:
+      choices:
+        database: postgresql
+        language: typescript
+        framework: nestjs (standalone application context, no HTTP server)
+        package_manager: pnpm
+        testing_tool_e2e: jest (integration tests consuming queue messages)
+        testing_tool_unit: jest
+      notes: styling not applicable — no UI; shares the API Service's PostgreSQL schema
+        (API Service owns it)
   comp_relational_database:
     name: Relational Database
     kind: infrastructure
+    stack:
+      choices:
+        managed_service: PostgreSQL on Amazon RDS
   comp_object_storage:
     name: Object Storage
     kind: infrastructure
+    stack:
+      choices:
+        managed_service: Amazon S3
   comp_job_queue:
     name: Job Queue
     kind: infrastructure
+    stack:
+      choices:
+        managed_service: Amazon SQS
   comp_identity_provider:
     name: Identity Provider
     kind: managed_service
+    stack:
+      choices:
+        managed_service: AWS Cognito (OIDC/SAML; other OIDC/SAML providers later)
