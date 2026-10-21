@@ -1,0 +1,23 @@
+version: 1
+components:
+  comp_web_app:
+    name: Web App
+    kind: web_ui
+  comp_api_service:
+    name: API Service
+    kind: api_service
+  comp_worker:
+    name: Worker
+    kind: worker
+  comp_relational_database:
+    name: Relational Database
+    kind: infrastructure
+  comp_object_storage:
+    name: Object Storage
+    kind: infrastructure
+  comp_job_queue:
+    name: Job Queue
+    kind: infrastructure
+  comp_identity_provider:
+    name: Identity Provider
+    kind: managed_service
